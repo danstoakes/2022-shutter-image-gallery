@@ -21,7 +21,8 @@ class ExtendMediaTable extends Migration
                 $table->string('acc_alternative')->after('caption')->nullable();
                 $table->json('exif_data')->after('acc_alternative')->nullable();
                 $table->boolean('is_hidden')->after('exif_data');
-                $table->boolean('is_album_cover')->after('is_hidden');
+                $table->boolean('is_favourite')->after('is_hidden');
+                $table->boolean('is_album_cover')->after('is_favourite');
             });
         };
     }
