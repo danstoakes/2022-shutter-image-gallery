@@ -21,4 +21,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::controller(ModalController::class)->group(function () {
+    Route::post("/modal/loadModal", [ModalController::class, "loadModal"])->name("modal.loadModal");
+});
+
 require __DIR__.'/auth.php';

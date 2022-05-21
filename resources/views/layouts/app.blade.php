@@ -8,13 +8,41 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/script.js') }}" defer></script>
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                $.ajaxSetup({
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    }
+                });
+        
+                $(".open-modal").on("click", function(e) {
+                    e.preventDefault();
+        
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('modal.loadModal') }}",
+                        data: {configData: $(this).attr("modal-config-data"), view: $(this).attr("modal-view-target")},
+                        success: function (data) {
+                            $('#modal_content').html(data);
+                        },
+                        error: function (xhr, status, error) {
+                            var errorMessage = xhr.status + " - " + xhr.responseText
+                            console.log("ERROR: " + errorMessage);
+                        }
+                    });
+                });
+            });
+        </script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -29,6 +57,7 @@
 
             <!-- Page Content -->
             <main>
+                @include("partials.modal")
                 {{ $slot }}
             </main>
         </div>
