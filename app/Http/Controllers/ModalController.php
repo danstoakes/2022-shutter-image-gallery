@@ -40,9 +40,12 @@ class ModalController extends Controller
 
         if ($configData == null || $modalContent == null)
             return $this->loadErrorModal("The request contained null data.");
-        
-        return View::make($modalContent, [
-            "data" => $configData
+
+        return View::make("partials/modal", [
+            "extraClasses" => $configData["extraClasses"],
+            "title" => $configData["title"],
+            "subtitle" => $configData["subtitle"],
+            "content" => View::make($modalContent, $configData)
         ]);
     }
 }

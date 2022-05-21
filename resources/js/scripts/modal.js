@@ -101,3 +101,28 @@
     tabContentElement.classList.remove("hidden");
     }
 }
+
+$(document).ready(function() {
+    $.ajaxSetup ({
+        headers: {
+            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+        }
+    });
+
+    $(".open-modal").on("click", function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "/modal/loadModal",
+            data: {configData: $(this).attr("modal-config-data"), view: $(this).attr("modal-view-target")},
+            success: function (data) {
+                $('#modal_main').html(data);
+            },
+            error: function (xhr, status, error) {
+                var errorMessage = xhr.status + " - " + xhr.responseText
+                console.log("ERROR: " + errorMessage);
+            }
+        });
+    });
+});
