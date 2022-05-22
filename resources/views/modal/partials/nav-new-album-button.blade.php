@@ -2,6 +2,8 @@
     'user' => Auth::user(),
     'title' => 'New Album',
     'subtitle' => 'Enter a name for the album',
+    'buttonText' => 'Create',
+    'buttonTarget' => 'new_album_form_submit',
     'border' => true,
     'extraClasses' => 'w-96 max-w-sm'
 ]) }}" modal-view-target="modal/template/new-album-form">

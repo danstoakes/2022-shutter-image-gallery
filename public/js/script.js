@@ -6,24 +6,34 @@
 
  function toggleModal ()
  {
-    // lock the display in place to prevent scrolling
-    const body = document.querySelector("body");
-    if (body !== null) 
-    {
-    if (body.classList.contains("modal-active"))
-    {
-        const content = document.getElementById("modal_content");
-        content.innerHTML = null;
-    }
-
-    body.classList.toggle("modal-active");
-    }
-
     // hides the modal if toggled off
     const modal = document.getElementById("modal");
     if (modal !== null) {
         modal.classList.toggle("opacity-0");
         modal.classList.toggle("pointer-events-none");
+    }
+
+    // lock the display in place to prevent scrolling
+    const body = document.querySelector("body");
+    if (body !== null) 
+    {
+        if (body.classList.contains("modal-active"))
+        {
+            if (modal !== null)
+            {
+                // remove the modal elements once the modal has transitioned from view
+                modal.addEventListener("transitionend", function () {
+                    // only hide if the modal is being closed/has been closed
+                    if (modal.classList.contains("opacity-0")) {
+                        const content = document.getElementById("modal_content");
+                        content.innerHTML = null;
+                        content.classList.remove("overflow-scroll");
+                    }
+                });
+            }
+        }
+
+        body.classList.toggle("modal-active");
     }
  }
  

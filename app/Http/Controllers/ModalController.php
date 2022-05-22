@@ -45,6 +45,8 @@ class ModalController extends Controller
             "extraClasses" => $configData["extraClasses"],
             "title" => $configData["title"],
             "subtitle" => $configData["subtitle"],
+            "buttonText" => $configData["buttonText"],
+            "buttonTarget" => $configData["buttonTarget"],
             "content" => View::make($modalContent, $configData)
         ]);
     }

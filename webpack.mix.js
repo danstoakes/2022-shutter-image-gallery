@@ -13,7 +13,8 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .scripts([
-        'resources/js/scripts/modal.js'
+        'resources/js/scripts/modal.js',
+        'resources/js/scripts/media_library_preview.js'
     ], 'public/js/script.js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),

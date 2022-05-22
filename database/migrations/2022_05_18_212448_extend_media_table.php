@@ -15,14 +15,12 @@ class ExtendMediaTable extends Migration
     {
         if (Schema::hasTable('media')) {
             Schema::table('media', function (Blueprint $table) {
-                $table->unsignedBigInteger('user_id')->after('order_column');
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-                $table->string('caption')->after('user_id')->nullable();
+                $table->string('caption')->after('order_column')->nullable();
                 $table->string('acc_alternative')->after('caption')->nullable();
                 $table->json('exif_data')->after('acc_alternative')->nullable();
-                $table->boolean('is_hidden')->after('exif_data');
-                $table->boolean('is_favourite')->after('is_hidden');
-                $table->boolean('is_album_cover')->after('is_favourite');
+                $table->boolean('is_hidden')->after('exif_data')->default(0);
+                $table->boolean('is_favourite')->after('is_hidden')->default(0);
+                $table->boolean('is_album_cover')->after('is_favourite')->default(0);
             });
         };
     }
@@ -34,11 +32,9 @@ class ExtendMediaTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('media', 'user_id', 'caption', 'acc_alternative', 'exif_data', 'is_hidden', 'is_album_cover')) {
+        if (Schema::hasColumn('media', 'caption', 'acc_alternative', 'exif_data', 'is_hidden', 'is_album_cover')) {
             Schema::table('media', function (Blueprint $table)
             {
-                $table->dropForeign('media_user_id_foreign');
-                $table->dropColumn('user_id');
                 $table->dropColumn('caption');
                 $table->dropColumn('acc_alternative');
                 $table->dropColumn('exif_data');

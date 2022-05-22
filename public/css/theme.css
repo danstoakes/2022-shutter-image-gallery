@@ -7,3 +7,9 @@
   height: 100%;
   overflow: hidden;
 }
+
+.upload-media-content-row {
+  padding-left: 1.25rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
