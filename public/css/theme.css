@@ -13,3 +13,27 @@
   margin-top: auto;
   margin-bottom: auto;
 }
+
+@media (min-width: 768px) {
+  .modal-media-image-section {
+    width: 66.66%;
+    max-width: 66.66%;
+  }
+}
+@media (max-width: 768px) {
+  .modal-media-image-section img {
+    height: 30vh;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+.modal-media-meta-section {
+  overflow: scroll;
+}
+@media (min-width: 768px) {
+  .modal-media-meta-section {
+    width: 33.33%;
+    max-width: 33.33%;
+    border-left-width: 1px;
+  }
+}

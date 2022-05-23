@@ -16,3 +16,30 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+
+.modal-media {
+    &-image-section {
+        // Tailwind sm
+        @media (min-width: 768px) {
+            width: 66.66%;
+            max-width: 66.66%;
+        }
+
+        img {
+            @media (max-width: 768px) {
+                height: 30vh;
+                object-fit: cover;
+            }
+        }
+    }
+
+    &-meta-section {
+        overflow: scroll;
+        // Tailwind sm
+        @media (min-width: 768px) {
+            width: 33.33%;
+            max-width: 33.33%;
+            border-left-width: 1px;
+        }
+    }
+}

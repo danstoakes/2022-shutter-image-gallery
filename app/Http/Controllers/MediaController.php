@@ -12,11 +12,11 @@ class MediaController extends Controller
 {
     public function library (Request $request)
     {
-        $images = Auth::user()->getMedia("images");
+        $images = Auth::user()->getMedia("images")->sortByDesc('id');
 
         return View::make('library')->with([
-            'images' => $images,
-            'imageCount' => count($images)
+            'mediaItems' => $images,
+            'mediaCount' => count($images)
         ]);
     }
 

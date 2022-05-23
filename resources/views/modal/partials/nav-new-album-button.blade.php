@@ -2,9 +2,13 @@
     'user' => Auth::user(),
     'title' => 'New Album',
     'subtitle' => 'Enter a name for the album',
-    'buttonText' => 'Create',
-    'buttonTarget' => 'new_album_form_submit',
-    'border' => true,
+    'buttons' => [
+        [
+            'text' => 'Create',
+            'styling' => 'font-bold text-blue-500 hover:text-blue-800',
+            'target' => 'new_album_form_submit'
+        ]
+    ],
     'extraClasses' => 'w-96 max-w-sm'
 ]) }}" modal-view-target="modal/template/new-album-form">
     <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
