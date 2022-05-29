@@ -1,14 +1,5 @@
 @section('title', 'Albums')
-<x-app-layout>
-    {{-- <x-slot name="header">
-        <div class="flex flex-col lg:flex-row justify-between h-full items-center">
-            <h2 class="font-semibold text-xl text-white leading-tight whitespace-nowrap overflow-hidden overflow-ellipsis w-full lg:w-1/2 mb-5 lg:mb-0">
-                Companies
-            </h2>
-            <a class="btn btn-primary" href="{{ route('company.create') }}">
-        </div>
-    </x-slot> --}}
-    
+<x-app-layout>    
     @if (count($albums) > 0)
         @include('albums.list')
     @else

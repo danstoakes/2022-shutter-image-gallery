@@ -5,7 +5,7 @@
         "uploaded" => $media->created_at->diffForHumans(),
         "file_name" => $media->file_name,
         "name" => $media->name,
-        "caption" => /* $media->getMetadata("caption") */ "This is a caption",
+        "caption" => $media->caption,
         "file_type" => $media->mime_type,
         "file_size" => $media->getHumanReadableSize($media->size),
         "dimensions" => $media->getDimensionsString(),
@@ -15,8 +15,8 @@
         'buttons' => [
             [
                 'text' => 'Delete',
-                'styling' => 'font-regular text-blue-500 hover:text-blue-800 mr-2',
-                'target' => 'new_album_form_submit'
+                'styling' => 'font-regular text-red-500 hover:text-red-800 mr-2',
+                'target' => 'media_item_delete'
             ],
             [
                 'text' => 'Update',

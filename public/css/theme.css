@@ -37,3 +37,11 @@
     border-left-width: 1px;
   }
 }
+
+.navigation {
+  height: 4rem;
+}
+
+.min-h-screen-nav {
+  min-height: calc(100vh - 4rem);
+}

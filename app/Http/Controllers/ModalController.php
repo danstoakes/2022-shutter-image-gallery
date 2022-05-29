@@ -18,8 +18,20 @@ class ModalController extends Controller
      */
     private function loadErrorModal ($errorMessage)
     {
-        return View::make("modal/template/no-content-single", [
-            "errorMessage" => $errorMessage
+        return View::make("partials/modal", [
+            "extraClasses" => "w-[40rem] h-40 max-w-sm sm:max-w-xl",
+            "title" => "There was a problem",
+            "subtitle" => "Attachment Details",
+            "buttons" => [
+                [
+                    'text' => 'Close',
+                    'styling' => 'font-bold text-blue-500 hover:text-blue-800 mr-2',
+                    'target' => 'modal_close_button'
+                ]
+            ],
+            "content" => View::make("modal/template/no-content-single", [
+                "errorMessage" => $errorMessage
+            ])
         ]);
     }
 

@@ -4,7 +4,7 @@
             <div class="border-b border-gray-300 pb-2">
                 <div class="flex">
                     <div class="select-none cursor-default w-full">
-                        <h2 class="w-full text-4xl font-bold">{{ $title }}</h2>
+                        <h2 class="w-full text-4xl font-bold">{{ $title ?? "Error" }}</h2>
                     </div>
                     <button id="modal_close_button" class="flex" onclick="toggleModal()">
                         <svg class="[ fill-current text-black cursor-pointer ]" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" onclick="toggleModal()">

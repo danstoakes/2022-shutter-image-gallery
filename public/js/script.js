@@ -26,8 +26,10 @@
                     // only hide if the modal is being closed/has been closed
                     if (modal.classList.contains("opacity-0")) {
                         const content = document.getElementById("modal_content");
-                        content.innerHTML = null;
-                        content.classList.remove("overflow-scroll");
+                        if (content) {
+                            content.innerHTML = null;
+                            content.classList.remove("overflow-scroll");
+                        }
                     }
                 });
             }

@@ -14,28 +14,24 @@
                 <p><span class="font-semibold">Dimensions:</span> {{ $dimensions }}</p>
             </div>
             <div class="[ w-full ]">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('updateMedia') }}">
                     @csrf
-                    <label for="name">{{ __("Name") }}</label>
-                    <input name="name" value="{{ $name }}" type="text" class="[ text-sm appearance-none rounded w-full mb-5 py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10 ]" />
+                    <input type="hidden" name="image" value="{{ $media_id }}" />
+
+                    <label for="name">{{ __("Name") }}<span class="text-red-500">*</span></label>
+                    <input name="name" value="{{ $name }}" type="text" class="[ text-sm appearance-none rounded w-full mb-5 py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10 ]" required />
 
                     <label for="caption">{{ __("Caption") }}</label>
                     <textarea name="caption" class="[ form-textarea w-full text-sm appearance-none rounded w-full mb-2 py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-20 ]" style="resize: none;">{{ $caption }}</textarea>
 
-                   {{-- <p class="[ mt-4 ]">Required fields are marked <span class="[ text-red-600 ]">*</span></p> --}}
-
-                    {{-- <button id="group-form-submit" class="btn btn-primary mt-3 mb-2" type="submit">Update</button> --}}
+                    <input type="submit" class="hidden" id="new_album_form_submit" />
                 </form>
-            </div>
-            {{-- <div class="[ w-full flex ]">
-                <a class="[ btn-link ]" href="{{ $media }}" target="_blank">View fullscreen</a>
-                <span class="px-2">|</span>
-                <form method="POST" action="">
-                    @csrf
-                    @method('DELETE')
-                    <input class="[ text-red-600 cursor-pointer ]" type="submit" name="Delete" value="Delete" />
-                </form>
-            </div> --}}
+            </div>        
+            <form method="POST" action="{{ route('deleteMedia', $media_id) }}" class="hidden">
+                @csrf
+                @method("DELETE")
+                <input type="submit" name="Delete" value="Delete" id="media_item_delete" />
+            </form>
         </div>
     </div>
 </div>

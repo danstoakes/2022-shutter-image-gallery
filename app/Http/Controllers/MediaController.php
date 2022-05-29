@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +28,12 @@ class MediaController extends Controller
 
     public function favourites (Request $request)
     {
+        $media = Auth::user()->getMedia("images")->where("is_favourite", true);
 
+        return View::make('favourites')->with([
+            'mediaItems' => $media,
+            'mediaCount' => count($media)
+        ]);
     }
 
     public function recents (Request $request)
@@ -48,6 +54,39 @@ class MediaController extends Controller
     public function deleted (Request $request)
     {
 
+    } 
+
+    public function deleteMedia (Request $request, $id)
+    {
+        $image = Media::find($id);
+        $image->delete();
+
+        return Redirect::route('library')->with('success', 'Successfully deleted media!');
+    }
+
+    public function updateMedia (Request $request)
+    {
+        $rules = [
+            "name" => "required"
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator);
+        } else {
+            $image = Media::find($request->image);
+            $image->name = $request->name;
+    
+            if ($request->has("caption"))
+                $image->caption = $request->caption;
+    
+            $image->save();
+        }
+
+        return Redirect::route('library')->with('success', 'Successfully updated media!');
     }
 
     public function uploadMedia (Request $request)

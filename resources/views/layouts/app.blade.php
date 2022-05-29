@@ -25,7 +25,7 @@
             <!-- Page Content -->
             <main>
                 @include("partials.modal-frame")
-                <div class="flex min-h-screen">
+                <div class="flex min-h-screen-nav">
                     <aside class="h-auto sm:min-w-[12rem]">
                         <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-full">
                             <span class="text-gray-600 font-bold block mb-2 sm:block hidden">Photos</span>
@@ -47,7 +47,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <a href="{{ route('favourites') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                         </svg>

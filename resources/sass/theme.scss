@@ -43,3 +43,11 @@
         }
     }
 }
+
+.navigation {
+    height: $nav-height;
+}
+
+.min-h-screen-nav {
+    min-height: calc(#{100vh} - #{$nav-height});
+}
