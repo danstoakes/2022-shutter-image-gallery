@@ -49,16 +49,6 @@ function previewImages (input) {
         })(image);
         reader.readAsDataURL(file);
 
-        /*
-                            <div class="flex">
-                        <img class="object-cover aspect-square rounded w-2/12 drop-shadow-md" src="https://picsum.photos/200/300" />
-                        <div class="flex flex-col pl-6 my-auto">
-                            <p><span class="font-semibold">File name:</span> thisisanexamplefilename.jpg</p>
-                            <p><span class="font-semibold">Dimensions:</span> 1920 by 1080 pixels</p>
-                            <p><span class="font-semibold">File size:</span> 64 MB</p>
-                        </div>
-                    </div>*/
-
         var containerDiv = document.createElement("div");
         containerDiv.className = "flex";
 
@@ -108,8 +98,6 @@ function resetImageModal () {
 
 function sendForm (button)
 {
-    console.log(button);
-
     if (button) {
         console.log("clicked");
         button.click();
