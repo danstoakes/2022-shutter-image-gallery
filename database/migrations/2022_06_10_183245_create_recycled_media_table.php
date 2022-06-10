@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlbumTable extends Migration
+class CreateRecycledMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateAlbumTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('album')) {
-            Schema::create('album', function (Blueprint $table) {
+        if (!Schema::hasTable('recycled_media')) {
+            Schema::create('recycled_media', function (Blueprint $table) {
                 $table->id();
-                $table->string("name");
-                $table->unsignedBigInteger("user_id");
+                $table->unsignedBigInteger("media_id");
+                $table->foreign("media_id")->references("id")->on("media")->onDelete("cascade");
+                $table->date("expiry_date");
                 $table->timestamps();
-
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             });
         }
     }
@@ -32,6 +31,6 @@ class CreateAlbumTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('album');
+        Schema::dropIfExists('recycled_media');
     }
 }

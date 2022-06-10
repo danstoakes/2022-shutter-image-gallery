@@ -26,7 +26,10 @@ Route::get('/', function () {
     return view('library');
 })->middleware(['auth'])->name('library'); */
 
+Route::middleware(['auth:sanctum', 'verified'])->get('favourites', 'App\Http\Controllers\MediaController@favourites')->name('favourites');
+Route::middleware(['auth:sanctum', 'verified'])->get('hidden', 'App\Http\Controllers\MediaController@hidden')->name('hidden');
 Route::middleware(['auth:sanctum', 'verified'])->get('library', 'App\Http\Controllers\MediaController@library')->name('library');
+Route::middleware(['auth:sanctum', 'verified'])->get('recents', 'App\Http\Controllers\MediaController@recents')->name('recents');
 
 Route::resource('album', AlbumController::class)->middleware('auth');
 
@@ -39,8 +42,6 @@ Route::controller(MediaController::class)->group(function () {
     Route::post('/album/update-media', [MediaController::class, 'updateMedia'])->name('updateMedia');
     Route::delete('/album/delete-media/{id}', [MediaController::class, 'deleteMedia'])->name('deleteMedia');
 });
-
-Route::get('favourites', [MediaController::class, 'favourites'])->name('favourites');
 
 Route::controller(ModalController::class)->group(function () {
     Route::post("/modal/loadModal", [ModalController::class, "loadModal"])->name("modal.loadModal");

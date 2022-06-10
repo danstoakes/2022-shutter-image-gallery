@@ -17,7 +17,8 @@ class MediaController extends Controller
 
         return View::make('library')->with([
             'mediaItems' => $images,
-            'mediaCount' => count($images)
+            'mediaCount' => count($images),
+            'title' => 'Library'
         ]);
     }
 
@@ -30,20 +31,36 @@ class MediaController extends Controller
     {
         $media = Auth::user()->getMedia("images")->where("is_favourite", true);
 
-        return View::make('favourites')->with([
+        return View::make('library')->with([
             'mediaItems' => $media,
-            'mediaCount' => count($media)
+            'mediaCount' => count($media),
+            'title' => 'Favourites'
         ]);
     }
 
     public function recents (Request $request)
     {
+        $endDate = date("Y-m-d H:i:s");
+        $startDate = date("Y-m-d H:i:s", strtotime("-1 week"));
 
+        $images = Auth::user()->getMedia("images")->whereBetween("updated_at", [$startDate, $endDate])->sortByDesc("id");
+
+        return View::make('library')->with([
+            'mediaItems' => $images,
+            'mediaCount' => count($images),
+            'title' => 'Recents'
+        ]);
     }
 
     public function hidden (Request $request)
     {
+        $media = Auth::user()->getMedia("images")->where("is_hidden", true);
 
+        return View::make('library')->with([
+            'mediaItems' => $media,
+            'mediaCount' => count($media),
+            'title' => 'Hidden'
+        ]);
     }
 
     public function export (Request $request)
