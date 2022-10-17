@@ -68,7 +68,7 @@
  const openModalButton = document.querySelectorAll(".open-modal");
  for (var i = 0; i < openModalButton.length; i++)
  {
-    openModalButton[i].addEventListener("click", function (event) {
+    openModalButton[i].addEventListener("dblclick", function (event) {
         event.preventDefault();
         toggleModal();
     });
@@ -121,7 +121,7 @@ $(document).ready(function() {
         }
     });
 
-    $(".open-modal").on("click", function (event) {
+    $(".open-modal").on("dblclick", function (event) {
         event.preventDefault();
 
         $.ajax({
@@ -136,6 +136,23 @@ $(document).ready(function() {
                 console.log("ERROR: " + errorMessage);
             }
         });
+    });
+
+    $(".open-modal").on("click", function (event) {
+        var clickedItem = event.currentTarget;
+
+        if (clickedItem)
+        {
+            if (clickedItem.getAttribute("modal-selected-data") == "true")
+            {
+                clickedItem.setAttribute("modal-selected-data", false);
+                clickedItem.classList.remove("item-selected");
+            } else
+            {
+                clickedItem.setAttribute("modal-selected-data", true);
+                clickedItem.classList.add("item-selected");
+            }
+        }
     });
 });
 // https://stackoverflow.com/a/38350925
@@ -243,3 +260,33 @@ function sendForm (button)
         button.click();
     }
 }
+$(document).ready(function() {
+    $.ajaxSetup ({
+        headers: {
+            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+        }
+    });
+    
+    $(".favourite-button").on("click", function (event) {
+        const selectedItems = document.querySelectorAll(".item-selected");
+        selectedItems.forEach(item => {
+            var itemDataString = $(item).attr("modal-config-data");
+            var itemData = JSON.parse(itemDataString);
+
+            $.ajax({
+                type: "POST",
+                url: "/media/favourite/",
+                data: {id: itemData.media_id},
+                success: function (data) {
+                    // $('#modal_main').html(data);
+                    item.classList.toggle("item-favourited");
+                    item.classList.toggle("item-selected");
+                },
+                error: function (xhr, status, error) {
+                    var errorMessage = xhr.status + " - " + xhr.responseText
+                    console.log("ERROR: " + errorMessage);
+                }
+            });
+        });
+    });
+});

@@ -1,5 +1,5 @@
 <div class="items-center flex flex-col hover:scale-[1.05] hover:opacity-[1] transition ease-in-out delay-50 cursor-pointer opacity-[0.85]">
-    <a class="my-auto open-modal" modal-config-data="{{ json_encode([
+    <a class="my-auto open-modal{{ $media->is_favourite ? ' item-favourited' : '' }}" modal-config-data="{{ json_encode([
         "media" => $url,
         "media_id" => $media->id,
         "uploaded" => $media->created_at->diffForHumans(),

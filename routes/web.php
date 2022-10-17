@@ -38,6 +38,7 @@ Route::controller(AlbumController::class)->group(function () {
 });
 
 Route::controller(MediaController::class)->group(function () {
+    Route::post('/media/favourite', [MediaController::class, 'favourite'])->name('favourite');
     Route::post('/album/upload-media', [MediaController::class, 'uploadMedia'])->name('uploadMedia');
     Route::post('/album/update-media', [MediaController::class, 'updateMedia'])->name('updateMedia');
     Route::delete('/album/delete-media/{id}', [MediaController::class, 'deleteMedia'])->name('deleteMedia');

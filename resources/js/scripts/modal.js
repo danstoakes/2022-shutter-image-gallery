@@ -68,7 +68,7 @@
  const openModalButton = document.querySelectorAll(".open-modal");
  for (var i = 0; i < openModalButton.length; i++)
  {
-    openModalButton[i].addEventListener("click", function (event) {
+    openModalButton[i].addEventListener("dblclick", function (event) {
         event.preventDefault();
         toggleModal();
     });
@@ -121,7 +121,7 @@ $(document).ready(function() {
         }
     });
 
-    $(".open-modal").on("click", function (event) {
+    $(".open-modal").on("dblclick", function (event) {
         event.preventDefault();
 
         $.ajax({
@@ -136,5 +136,22 @@ $(document).ready(function() {
                 console.log("ERROR: " + errorMessage);
             }
         });
+    });
+
+    $(".open-modal").on("click", function (event) {
+        var clickedItem = event.currentTarget;
+
+        if (clickedItem)
+        {
+            if (clickedItem.getAttribute("modal-selected-data") == "true")
+            {
+                clickedItem.setAttribute("modal-selected-data", false);
+                clickedItem.classList.remove("item-selected");
+            } else
+            {
+                clickedItem.setAttribute("modal-selected-data", true);
+                clickedItem.classList.add("item-selected");
+            }
+        }
     });
 });

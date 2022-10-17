@@ -27,6 +27,23 @@ class MediaController extends Controller
 
     }
 
+    public function favourite (Request $request)
+    {
+        $mediaId = json_decode($request->id, true);
+
+        if ($mediaId)
+        {
+            $mediaItem = Media::find($mediaId);
+
+            if ($mediaItem)
+                $mediaItem->is_favourite = !$mediaItem->is_favourite;
+
+            $mediaItem->save();
+        }
+
+        print_r($mediaItem->is_favourite);
+    }
+
     public function favourites (Request $request)
     {
         $media = Auth::user()->getMedia("images")->where("is_favourite", true);
