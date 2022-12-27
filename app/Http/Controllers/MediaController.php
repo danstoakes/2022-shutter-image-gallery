@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Media;
+use App\Models\RecycledMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -13,7 +14,7 @@ class MediaController extends Controller
 {
     public function library (Request $request)
     {
-        $images = Auth::user()->getMedia("images")->sortByDesc('id');
+        $images = Auth::user()->getMedia("images")->whereNotIn("id", RecycledMedia::all()->pluck("media_id")->toArray())->sortByDesc('id');
 
         return View::make('library')->with([
             'mediaItems' => $images,
@@ -40,8 +41,6 @@ class MediaController extends Controller
 
             $mediaItem->save();
         }
-
-        print_r($mediaItem->is_favourite);
     }
 
     public function favourites (Request $request)
@@ -85,10 +84,34 @@ class MediaController extends Controller
 
     }
 
-    public function deleted (Request $request)
+    public function recycle (Request $request)
     {
+        $mediaId = json_decode($request->id, true);
 
-    } 
+        if ($mediaId)
+        {
+            $mediaItem = Media::find($mediaId);
+
+            if ($mediaItem)
+            {
+                $recycledMedia = new RecycledMedia;
+                $recycledMedia->media_id = $mediaId;
+                $recycledMedia->expiry_date = date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " + 30 days"));
+                $recycledMedia->save();
+            }
+        }
+    }
+
+    public function recycled (Request $request)
+    {
+        $media = Auth::user()->getMedia("images")->whereIn("id", RecycledMedia::all()->pluck("media_id")->toArray())->sortByDesc('id');
+
+        return View::make('library')->with([
+            'mediaItems' => $media,
+            'mediaCount' => count($media),
+            'title' => 'Recycle bin'
+        ]);
+    }
 
     public function deleteMedia (Request $request, $id)
     {

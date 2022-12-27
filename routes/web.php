@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('favourites', 'App\Http\Con
 Route::middleware(['auth:sanctum', 'verified'])->get('hidden', 'App\Http\Controllers\MediaController@hidden')->name('hidden');
 Route::middleware(['auth:sanctum', 'verified'])->get('library', 'App\Http\Controllers\MediaController@library')->name('library');
 Route::middleware(['auth:sanctum', 'verified'])->get('recents', 'App\Http\Controllers\MediaController@recents')->name('recents');
+Route::middleware(['auth:sanctum', 'verified'])->get('recycle-bin', 'App\Http\Controllers\MediaController@recycled')->name('recycle-bin');
 
 Route::resource('album', AlbumController::class)->middleware('auth');
 
@@ -39,6 +40,7 @@ Route::controller(AlbumController::class)->group(function () {
 
 Route::controller(MediaController::class)->group(function () {
     Route::post('/media/favourite', [MediaController::class, 'favourite'])->name('favourite');
+    Route::post('/media/recycle', [MediaController::class, 'recycle'])->name('recycle');
     Route::post('/album/upload-media', [MediaController::class, 'uploadMedia'])->name('uploadMedia');
     Route::post('/album/update-media', [MediaController::class, 'updateMedia'])->name('updateMedia');
     Route::delete('/album/delete-media/{id}', [MediaController::class, 'deleteMedia'])->name('deleteMedia');
