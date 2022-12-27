@@ -47,4 +47,12 @@ class AlbumController extends Controller
 
         return Redirect::route('album.index')->with('success', 'Successfully created new album!');
     }
+
+    public function show ($id)
+    {
+        $album = Album::find($id);
+
+        return View::make('albums.show')
+            ->with('album', $album);
+    }
 }

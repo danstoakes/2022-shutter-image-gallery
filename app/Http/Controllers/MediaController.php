@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use App\Models\RecycledMedia;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+
+use Spatie\MediaLibrary\Support\MediaStream;
 
 class MediaController extends Controller
 {
@@ -26,6 +29,18 @@ class MediaController extends Controller
     public function albums (Request $request)
     {
 
+    }
+
+    public function export (Request $request)
+    {
+        $mediaIds = json_decode($request->ids, true);
+
+        if ($mediaIds)
+        {
+            $media = Media::whereIn("id", $mediaIds)->get();
+
+            return MediaStream::create('my-files.zip')->addMedia($media);
+        }
     }
 
     public function favourite (Request $request)
@@ -77,11 +92,6 @@ class MediaController extends Controller
             'mediaCount' => count($media),
             'title' => 'Hidden'
         ]);
-    }
-
-    public function export (Request $request)
-    {
-
     }
 
     public function recycle (Request $request)

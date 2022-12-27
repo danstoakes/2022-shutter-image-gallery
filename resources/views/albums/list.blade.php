@@ -7,7 +7,7 @@
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-8 gap-10 p-6">
             @foreach ($albums as $album)
-                <x-album-tile caption="{{ $album->name }}" count="20" />
+                <x-album-tile caption="{{ $album->name }}" count="20" id="{{ $album->id }}" />
             @endforeach
         </div>
         @if ($albums->hasPages())
