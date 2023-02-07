@@ -38,7 +38,6 @@ Route::controller(AlbumController::class)->group(function () {
 });
 
 Route::controller(MediaController::class)->group(function () {
-    Route::post('/media/export', [MediaController::class, 'export'])->name('export');
     Route::post('/media/favourite', [MediaController::class, 'favourite'])->name('favourite');
     Route::post('/media/recycle', [MediaController::class, 'recycle'])->name('recycle');
     Route::post('/album/upload-media', [MediaController::class, 'uploadMedia'])->name('uploadMedia');

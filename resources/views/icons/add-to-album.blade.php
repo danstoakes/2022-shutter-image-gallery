@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+<svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
     <g>
         <path stroke-linecap="round" stroke-linejoin="round" d="M 19 11 L 5 11 M 19 11 C 20.105 11 21 11.895 21 13 L 21 19 C 21 20.105 20.105 21 19 21 L 5 21 C 3.895 21 3 20.105 3 19 L 3 13 C 3 11.895 3.895 11 5 11 M 19 11 L 19 9 C 19 7.895 18.105 7 17 7 M 5 11 L 5 9 C 5 7.895 5.895 7 7 7 M 7 7 L 7 5 C 7 3.895 7.895 3 9 3 L 15 3 C 16.105 3 17 3.895 17 5 L 17 7 M 7 7 L 17 7"/>
         <ellipse style="stroke-width: 1px; stroke: rgb(255, 255, 255); fill: rgb(255, 255, 255);" cx="18.784" cy="19.299" rx="2.759" ry="2.226"/>

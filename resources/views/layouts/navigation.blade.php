@@ -13,15 +13,14 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <div class="flex mr-6">
+                    @include("buttons/add-to-album")
+                    @include("buttons/favourite")
+                    @include("buttons/recycle-bin")
+                </div>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <div class="flex">
-                            <div class="flex mr-6">
-                                @include("buttons/add-to-album")
-                                @include("buttons/favourite")
-                                @include("buttons/export")
-                                @include("buttons/recycle-bin")
-                            </div>
                             <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                 <div>{{ Auth::user()->name }}</div>
 
@@ -54,7 +53,6 @@
                 <div class="flex mr-3">
                     @include("buttons/add-to-album")
                     @include("buttons/favourite")
-                    @include("buttons/export")
                     @include("buttons/recycle-bin")
                 </div>
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">

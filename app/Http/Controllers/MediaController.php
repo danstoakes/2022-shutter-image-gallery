@@ -31,18 +31,6 @@ class MediaController extends Controller
 
     }
 
-    public function export (Request $request)
-    {
-        $mediaIds = json_decode($request->ids, true);
-
-        if ($mediaIds)
-        {
-            $media = Media::whereIn("id", $mediaIds)->get();
-
-            return MediaStream::create('my-files.zip')->addMedia($media);
-        }
-    }
-
     public function favourite (Request $request)
     {
         $mediaId = json_decode($request->id, true);

@@ -88,13 +88,13 @@
     {
         // get the button from the <li> element
         let tab = tabChildren[i].children[0];
-        tab.classList.add("border-transparent", "hover:text-gray-600", "hover:border-gray-300", "dark:hover:text-gray-300");
+        tab.classList.add("border-transparent", "hover:text-gray-600", "hover:border-gray-300");
     }
     }
  
     const tabElement = document.getElementById(tabId);
     if (tabElement !== null)
-    tabElement.classList.remove("border-transparent", "hover:text-gray-600", "hover:border-gray-300", "dark:hover:text-gray-300");
+    tabElement.classList.remove("border-transparent", "hover:text-gray-600", "hover:border-gray-300");
 
     const contentSection = document.getElementById("modal_tab_content_section");
     if (contentSection !== null) 
