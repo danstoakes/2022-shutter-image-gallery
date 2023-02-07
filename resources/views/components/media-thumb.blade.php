@@ -24,7 +24,7 @@
                 'target' => 'new_album_form_submit'
             ]
         ]
-    ]) }}" modal-view-target="modal/template/media-item-single">
+    ]) }}" modal-view-target="modal/template/media-item-single" modal-button-type="thumb">
         <img class="object-cover w-full drop-shadow-md" src="{{ $url }}" />
     </a>
 </div>

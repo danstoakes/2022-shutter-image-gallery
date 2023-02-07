@@ -18,6 +18,6 @@
     "dimensions" => $media->getDimensionsString(),
     "title" => "Attachment Details",
     "border" => true
-]) }}" modal-view-target="modal/template/media-item-single">
+]) }}" modal-view-target="modal/template/media-item-single" modal-button-type="thumb">
     {{ $media('thumb-cropped') }}
 </button>

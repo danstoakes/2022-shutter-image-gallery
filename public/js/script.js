@@ -143,14 +143,35 @@ $(document).ready(function() {
 
         if (clickedItem)
         {
-            if (clickedItem.getAttribute("modal-selected-data") == "true")
+            if (clickedItem.getAttribute("modal-button-type") == "thumb")
             {
-                clickedItem.setAttribute("modal-selected-data", false);
-                clickedItem.classList.remove("item-selected");
+                if (clickedItem.getAttribute("modal-selected-data") == "true")
+                {
+                    clickedItem.setAttribute("modal-selected-data", false);
+                    clickedItem.classList.remove("item-selected");
+                } else
+                {
+                    clickedItem.setAttribute("modal-selected-data", true);
+                    clickedItem.classList.add("item-selected");
+                }
             } else
             {
-                clickedItem.setAttribute("modal-selected-data", true);
-                clickedItem.classList.add("item-selected");
+                event.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/modal/loadModal",
+                    data: {configData: $(this).attr("modal-config-data"), view: $(this).attr("modal-view-target")},
+                    success: function (data) {
+                        $('#modal_main').html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        var errorMessage = xhr.status + " - " + xhr.responseText
+                        console.log("ERROR: " + errorMessage);
+                    }
+                });
+
+                toggleModal();
             }
         }
     });
