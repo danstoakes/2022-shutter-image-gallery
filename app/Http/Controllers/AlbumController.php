@@ -19,7 +19,7 @@ class AlbumController extends Controller
 
         return View::make('albums.index')->with([
             'albums' => $albums,
-            'albumCount' => count(Album::all())
+            'albumCount' => Album::all()->count()
         ]);
     }
 
@@ -70,8 +70,13 @@ class AlbumController extends Controller
     public function show ($id)
     {
         $album = Album::find($id);
+        $media = $album->media;
 
         return View::make('albums.show')
-            ->with('album', $album);
+            ->with([
+                'album' => $album,
+                'mediaCount' => $media->count(),
+                'mediaItems' => $media
+            ]);
     }
 }
