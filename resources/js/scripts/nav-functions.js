@@ -50,36 +50,52 @@ $(document).ready(function() {
         });
     });
 
-    $(".album-export").on("click", function (event) {
-        const selectedItems = document.querySelectorAll(".item-selected");
-
-        var ids = [];
+    $(".album-add-button").on("click", function (event) {
+        /* const selectedItems = document.querySelectorAll(".item-selected");
         selectedItems.forEach(item => {
             var itemDataString = $(item).attr("modal-config-data");
-            ids.push(JSON.parse(itemDataString).media_id);
-        });
+            var itemData = JSON.parse(itemDataString);
 
-        ids = JSON.stringify(ids);
+            $.ajax({
+                type: "POST",
+                url: "/album/add/",
+                data: {id: itemData.media_id},
+                success: function (data) {
+                    $('#modal_main').html(data);
+                },
+                error: function (xhr, status, error) {
+                    var errorMessage = xhr.status + " - " + xhr.responseText
+                    console.log("ERROR: " + errorMessage);
+                }
+            });
+        }); */
 
-        $.ajax({
-            type: "POST",
-            url: "/media/export/",
-            data: {ids: ids},
-            success: function (data) {
-                // $('#modal_main').html(data);
-                // item.parentElement.remove();
-                console.log(data);
+        event.preventDefault();
 
-                const link = document.createElement('a');
-                link.setAttribute('href', data);
-                link.setAttribute('download', 'yourfilename.zip'); // Need to modify filename ...
-                console.log(link);
-                link.click();
-            },
-            error: function (xhr, status, error) {
-                var errorMessage = xhr.status + " - " + xhr.responseText
-                console.log("ERROR: " + errorMessage);
-            }
-        });
+        const selectedItems = document.querySelectorAll(".item-selected");
+
+        if (selectedItems && selectedItems.length > 0)
+        {
+            var mediaIds = [];
+            selectedItems.forEach(item => {
+                var itemDataString = $(item).attr("modal-config-data");
+                var itemData = JSON.parse(itemDataString);
+
+                mediaIds.push(itemData["media_id"]);
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/modal/loadModal",
+                data: {configData: $(this).attr("modal-config-data"), view: $(this).attr("modal-view-target")},
+                success: function (data) {
+                    $('#modal_main').html(data);
+                },
+                error: function (xhr, status, error) {
+                    var errorMessage = xhr.status + " - " + xhr.responseText
+                    console.log("ERROR: " + errorMessage);
+                }
+            });
+        }
     });
 });

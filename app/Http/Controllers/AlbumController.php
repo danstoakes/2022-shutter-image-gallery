@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\View;
 
 class AlbumController extends Controller
 {
-    //
-
     public function index()
     {
         $albums = Auth::user()->albums()->paginate(24);
@@ -46,6 +44,24 @@ class AlbumController extends Controller
         }
 
         return Redirect::route('album.index')->with('success', 'Successfully created new album!');
+    }
+
+    public function add (Request $request)
+    {
+        $mediaId = json_decode($request->id, true);
+
+        if ($mediaId)
+        {
+            $mediaItem = Media::find($mediaId);
+
+            if ($mediaItem)
+            {
+                $recycledMedia = new RecycledMedia;
+                $recycledMedia->media_id = $mediaId;
+                $recycledMedia->expiry_date = date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " + 30 days"));
+                $recycledMedia->save();
+            }
+        }
     }
 
     public function show ($id)
