@@ -10,4 +10,9 @@ class Album extends Model
     use HasFactory;
 
     protected $table = "album";
+
+    public function media ()
+    {
+        return $this->belongsToMany(Media::class);
+    }
 }

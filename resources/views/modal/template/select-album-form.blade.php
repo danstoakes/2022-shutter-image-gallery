@@ -10,7 +10,7 @@
                     @endforeach
                 </div>
                 @if (isset($mediaIds))
-                    <input type="hidden" name="media_id" value="{{ $mediaIds }}" />
+                    <input type="hidden" name="media_ids" value="{{ $mediaIds }}" />
                 @endif
                 <input type="submit" class="hidden" id="media_add_form_submit" />
             </form>

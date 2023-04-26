@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\Media;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -48,22 +50,21 @@ class AlbumController extends Controller
 
     public function add (Request $request)
     {
-        ddd($request);
+        $albumId = json_decode($request->album, true);
+        $mediaIds = json_decode($request->media_ids, true);
 
-        $mediaId = json_decode($request->id, true);
+        if ($albumId && $mediaIds) {
+            $album = Album::find($albumId);
+            $attachedIds = $album->media->pluck("id")->toArray();
 
-        if ($mediaId)
-        {
-            $mediaItem = Media::find($mediaId);
-
-            if ($mediaItem)
-            {
-                $recycledMedia = new RecycledMedia;
-                $recycledMedia->media_id = $mediaId;
-                $recycledMedia->expiry_date = date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " + 30 days"));
-                $recycledMedia->save();
+            $mediaItems = Media::find(array_diff($mediaIds, $attachedIds));
+            
+            foreach ($mediaItems as $mediaItem) {
+                $album->media()->attach($mediaItem);
             }
         }
+
+        return Redirect::route('album.show', $album)->with('success', 'Successfully added to album!');
     }
 
     public function show ($id)
