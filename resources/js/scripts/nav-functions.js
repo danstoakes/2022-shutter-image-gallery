@@ -84,10 +84,13 @@ $(document).ready(function() {
                 mediaIds.push(itemData["media_id"]);
             });
 
+            var modalConfigData = JSON.parse($(this).attr("modal-config-data"));
+            modalConfigData["mediaIds"] = JSON.stringify(mediaIds);
+
             $.ajax({
                 type: "POST",
                 url: "/modal/loadModal",
-                data: {configData: $(this).attr("modal-config-data"), view: $(this).attr("modal-view-target")},
+                data: {configData: JSON.stringify(modalConfigData), view: $(this).attr("modal-view-target")},
                 success: function (data) {
                     $('#modal_main').html(data);
                 },

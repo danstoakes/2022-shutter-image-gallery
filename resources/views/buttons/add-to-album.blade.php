@@ -20,6 +20,7 @@
         ]
     ]) }}"
     modal-view-target="modal/template/select-album-form"
-    modal-button-type="nav">
+    modal-button-type="nav"
+>
     @include("icons/add-to-album")
 </button>

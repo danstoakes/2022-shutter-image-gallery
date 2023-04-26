@@ -9,7 +9,9 @@
                         <x-album-tile caption="{{ $album['name'] }}" count="20" id="{{ $album['id'] }}" modal-option />
                     @endforeach
                 </div>
-                <input type="hidden" name="" />
+                @if (isset($mediaIds))
+                    <input type="hidden" name="media_id" value="{{ $mediaIds }}" />
+                @endif
                 <input type="submit" class="hidden" id="media_add_form_submit" />
             </form>
         </div>

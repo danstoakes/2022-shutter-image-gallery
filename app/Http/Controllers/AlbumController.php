@@ -48,6 +48,8 @@ class AlbumController extends Controller
 
     public function add (Request $request)
     {
+        ddd($request);
+
         $mediaId = json_decode($request->id, true);
 
         if ($mediaId)
