@@ -1,5 +1,5 @@
 <button 
-    class="album-add-button flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 open-modal"
+    class="album-add-button header-button header-button-disabled [ flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 ] open-modal"
     modal-config-data="{{ json_encode([
         'albums' => Auth::user()->albums,
         'user' => Auth::user(),

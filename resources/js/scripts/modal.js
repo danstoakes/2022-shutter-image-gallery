@@ -154,6 +154,15 @@ $(document).ready(function() {
                     clickedItem.setAttribute("modal-selected-data", true);
                     clickedItem.classList.add("item-selected");
                 }
+
+                var selectedItems = document.querySelectorAll(".item-selected");
+                var headerButtons = document.querySelectorAll(".header-button");
+                headerButtons.forEach(button => {
+                    if (selectedItems && typeof selectedItems !== "undefined" && selectedItems.length > 0)
+                        button.classList.remove("header-button-disabled");
+                    else
+                        button.classList.add("header-button-disabled");
+                });
             } else
             {
                 event.preventDefault();
