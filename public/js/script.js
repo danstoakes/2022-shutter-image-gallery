@@ -54,26 +54,6 @@
         toggleModal();
  };
  
- // handles closing the modal when clicked outside of it
- const modalOverlay = document.getElementById("modal_overlay");
- if (modalOverlay !== null)
-    modalOverlay.addEventListener("click", toggleModal);
- 
- // handles closing the modal (DISABLED because topbar is now not loaded with the document)
- /* const closeModalButton = document.getElementById("modal_close_button");
- if (closeModalButton !== null)
-   closeModalButton.addEventListener("click", toggleModal); */
- 
- // handles opening the modal
- const openModalButton = document.querySelectorAll(".open-modal");
- for (var i = 0; i < openModalButton.length; i++)
- {
-    openModalButton[i].addEventListener("dblclick", function (event) {
-        event.preventDefault();
-        toggleModal();
-    });
- }
- 
  function toggleModalTab (tabId, contentSectionId)
  {
    const tabElement = document.getElementById(tabId);
@@ -184,6 +164,23 @@ $(document).ready(function() {
             }
         }
     });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+     // handles closing the modal when clicked outside of it
+    const modalOverlay = document.getElementById("modal_overlay");
+    if (modalOverlay !== null)
+        modalOverlay.addEventListener("click", toggleModal);
+    
+    // handles opening the modal
+    const openModalButton = document.querySelectorAll(".open-modal");
+    for (var i = 0; i < openModalButton.length; i++)
+    {
+        openModalButton[i].addEventListener("dblclick", function (event) {
+            event.preventDefault();
+            toggleModal();
+        });
+    }
 });
 // https://stackoverflow.com/a/38350925
 function readableBytes(bytes) {
