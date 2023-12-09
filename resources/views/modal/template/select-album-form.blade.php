@@ -6,7 +6,14 @@
                 @csrf
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-8 gap-10 mt-4">
                     @foreach ($albums as $album)
-                        <x-album-tile caption="{{ $album['name'] }}" count="20" id="{{ $album['id'] }}" modal-option />
+                        @php $albumObject = \App\Models\Album::find($album["id"]); @endphp
+                        <x-album-tile 
+                            caption="{{ $album['name'] }}" 
+                            count="20" 
+                            id="{{ $album['id'] }}" 
+                            thumbnail="{{ $albumObject->media->count() > 0 ? $albumObject->media->first()->getUrl() : 'https://picsum.photos/200/300' }}"
+                            modal-option 
+                        />
                     @endforeach
                 </div>
                 @if (isset($mediaIds))

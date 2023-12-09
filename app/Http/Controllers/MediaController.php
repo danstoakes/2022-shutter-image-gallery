@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
-use Spatie\MediaLibrary\Support\MediaStream;
-
 class MediaController extends Controller
 {
     public function library (Request $request)
