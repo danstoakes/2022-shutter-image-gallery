@@ -340,25 +340,6 @@ $(document).ready(function() {
     });
 
     $(".album-add-button").on("click", function (event) {
-        /* const selectedItems = document.querySelectorAll(".item-selected");
-        selectedItems.forEach(item => {
-            var itemDataString = $(item).attr("modal-config-data");
-            var itemData = JSON.parse(itemDataString);
-
-            $.ajax({
-                type: "POST",
-                url: "/album/add/",
-                data: {id: itemData.media_id},
-                success: function (data) {
-                    $('#modal_main').html(data);
-                },
-                error: function (xhr, status, error) {
-                    var errorMessage = xhr.status + " - " + xhr.responseText
-                    console.log("ERROR: " + errorMessage);
-                }
-            });
-        }); */
-
         event.preventDefault();
 
         const selectedItems = document.querySelectorAll(".item-selected");
