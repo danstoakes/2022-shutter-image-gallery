@@ -11,7 +11,7 @@
                     caption="{{ $album->name }}" 
                     count="{{ $album->media->count() }}" 
                     id="{{ $album->id }}"
-                    thumbnail="{{ $album->media->count() > 0 ? $album->media->first()->getUrl() : 'https://picsum.photos/200/300' }}"
+                    thumbnail="{{ $album->media->count() > 0 ? $album->media->first()->getUrl() : asset('img/fallback.png') }}"
                 />
             @endforeach
         </div>
