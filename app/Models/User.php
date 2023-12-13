@@ -48,4 +48,12 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasMany(Album::class);
     }
+
+    public function registerMediaConversions (\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
+    {
+        $this->addMediaConversion("thumbnail")
+            ->width(300)
+            ->height(300)
+            ->performOnCollections("images");
+    }
 }

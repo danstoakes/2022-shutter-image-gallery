@@ -18,7 +18,7 @@
             @if (count($mediaItems) > 0)
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-8 gap-10 p-6">
                     @foreach ($mediaItems as $media)
-                        <x-media-thumb :media="$media" url="{{ $media->getUrl() }}" />
+                        <x-media-thumb :media="$media" url="{{ $media->getUrl('thumbnail') }}" />
                     @endforeach
                 </div>
             @else

@@ -11,7 +11,7 @@
                             caption="{{ $album['name'] }}" 
                             count="{{ $albumObject->media->count() }}" 
                             id="{{ $album['id'] }}" 
-                            thumbnail="{{ $albumObject->media->count() > 0 ? $albumObject->media->first()->getUrl() : asset('img/fallback.png') }}"
+                            thumbnail="{{ $albumObject->media->count() > 0 ? $albumObject->media->first()->getUrl('thumbnail') : asset('img/fallback.png') }}"
                             modal-option 
                         />
                     @endforeach
