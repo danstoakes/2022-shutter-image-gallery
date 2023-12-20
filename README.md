@@ -1,7 +1,7 @@
-# Laravel Media Library
+# Shutter Image Gallery
+Shutter is an interactive web application for uploading, storing, and managing images. It is built using Laravel and is based upon the Spatie Media Library package. Images can be viewed both individually and as a group, whereby individual images are loaded into a modal, while grouped images are displayed in a grid. In addition, images can also be added to albums, favourited, and much more.
 
-Built upon Spatie Media Library.
+# Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Future plans
-* Have different albums, i.e. via the collection names. When uploading a new image, it should have a dropdown of all available collections or allow option for a new one.
-* read_exif_data to get exif data as a json string to be written to the database and retrieved/parsed into a EXIF model.
+Please make sure to update tests as appropriate.
