@@ -73,6 +73,9 @@ class MediaController extends Controller
     {
         $mediaId = json_decode($request->id, true);
 
+        if (RecycledMedia::where('media_id', $mediaId)->exists())
+            $this->deleteMedia($request, $mediaId);
+
         if ($mediaId)
         {
             $mediaItem = Media::find($mediaId);
@@ -100,11 +103,13 @@ class MediaController extends Controller
 
     public function deleteMedia (Request $request, $id)
     {
-        $request->merge(['id' => $id]);
-        $this->recycle($request);
-
-        // $image = Media::find($id);
-        // $image->delete();
+        if (RecycledMedia::where('media_id', $id)->exists()) {
+            $image = Media::find($id);
+            $image->delete();
+        } else {
+            $request->merge(['id' => $id]);
+            $this->recycle($request);
+        }
 
         return Redirect::route('library')->with('success', 'Successfully deleted media!');
     }

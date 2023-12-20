@@ -282,8 +282,10 @@ function resetImageModal () {
 
 function sendForm (button)
 {
-    if (button)
+    if (button) {
+        console.log("clicked");
         button.click();
+    }
 }
 $(document).ready(function() {
     $.ajaxSetup ({
