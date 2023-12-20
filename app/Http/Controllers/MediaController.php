@@ -111,8 +111,11 @@ class MediaController extends Controller
 
     public function deleteMedia (Request $request, $id)
     {
-        $image = Media::find($id);
-        $image->delete();
+        $request->merge(['id' => $id]);
+        $this->recycle($request);
+
+        // $image = Media::find($id);
+        // $image->delete();
 
         return Redirect::route('library')->with('success', 'Successfully deleted media!');
     }
