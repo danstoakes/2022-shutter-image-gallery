@@ -21,12 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/* Route::get('/library', function () {
-    return view('library');
-})->middleware(['auth'])->name('library'); */
-
 Route::middleware(['auth:sanctum', 'verified'])->get('favourites', 'App\Http\Controllers\MediaController@favourites')->name('favourites');
-Route::middleware(['auth:sanctum', 'verified'])->get('hidden', 'App\Http\Controllers\MediaController@hidden')->name('hidden');
 Route::middleware(['auth:sanctum', 'verified'])->get('library', 'App\Http\Controllers\MediaController@library')->name('library');
 Route::middleware(['auth:sanctum', 'verified'])->get('recents', 'App\Http\Controllers\MediaController@recents')->name('recents');
 Route::middleware(['auth:sanctum', 'verified'])->get('recycle-bin', 'App\Http\Controllers\MediaController@recycled')->name('recycle-bin');

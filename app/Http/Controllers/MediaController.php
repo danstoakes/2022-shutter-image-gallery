@@ -69,17 +69,6 @@ class MediaController extends Controller
         ]);
     }
 
-    public function hidden (Request $request)
-    {
-        $media = Auth::user()->getMedia("images")->where("is_hidden", true);
-
-        return View::make('library')->with([
-            'mediaItems' => $media,
-            'mediaCount' => count($media),
-            'title' => 'Hidden'
-        ]);
-    }
-
     public function recycle (Request $request)
     {
         $mediaId = json_decode($request->id, true);
