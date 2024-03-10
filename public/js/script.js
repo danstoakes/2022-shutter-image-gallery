@@ -181,6 +181,15 @@ document.addEventListener("DOMContentLoaded", () => {
             toggleModal();
         });
     }
+
+    const sidebar = document.querySelector("#MainSidebar");
+    const buttons = sidebar.querySelectorAll("li a");
+
+    let path = window.location.pathname.split("/")[1];
+    buttons.forEach(button => {
+        if (button.getAttribute("data-path") === path)
+            button.classList.add("bg-gray-100");
+    });
 });
 // https://stackoverflow.com/a/38350925
 function readableBytes(bytes) {
