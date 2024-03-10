@@ -1,6 +1,6 @@
 @section('title', '{{ $album->name }}')
 <x-app-layout>
-    <div class="bg-white shadow-sm grow">
+    <div class="bg-white shadow-sm grow" id="AlbumSingle" data-album-id="{{ $album->id }}">
         <div class="p-3 bg-white flex flex-col h-full">
             <div class="border-b border-gray-300 pb-2 select-none cursor-default">
                 <h1 class="w-full text-4xl font-bold">{{ $album->name }}</h1>

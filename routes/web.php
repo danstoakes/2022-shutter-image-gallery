@@ -31,6 +31,7 @@ Route::resource('album', AlbumController::class)->middleware('auth');
 Route::controller(AlbumController::class)->group(function () {
     Route::post('/album/create-album', [AlbumController::class, 'createAlbum'])->name('createAlbum');
     Route::post('/album/add', [AlbumController::class, 'add'])->name('addToAlbum');
+    Route::delete('/album/delete/{id}', [AlbumController::class, 'destroy'])->name('deleteAlbum');
 });
 
 Route::controller(MediaController::class)->group(function () {

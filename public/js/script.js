@@ -327,25 +327,43 @@ $(document).ready(function() {
     });
 
     $(".recycle-button").on("click", function (event) {
-        const selectedItems = document.querySelectorAll(".item-selected");
-        selectedItems.forEach(item => {
-            var itemDataString = $(item).attr("modal-config-data");
-            var itemData = JSON.parse(itemDataString);
+        if (event.currentTarget.hasAttribute("data-enabled-for-album")) {
+            let albumContainer = document.querySelector("#AlbumSingle");
+            let id = albumContainer.getAttribute("data-album-id");
 
             $.ajax({
-                type: "POST",
-                url: "/media/recycle/",
-                data: {id: itemData.media_id},
+                type: "DELETE",
+                url: "/album/delete",
+                data: { id: id },
                 success: function (data) {
-                    // $('#modal_main').html(data);
-                    item.parentElement.remove();
+                    window.location.href = "/album";
                 },
                 error: function (xhr, status, error) {
                     var errorMessage = xhr.status + " - " + xhr.responseText
                     console.log("ERROR: " + errorMessage);
                 }
             });
-        });
+        } else {
+            const selectedItems = document.querySelectorAll(".item-selected");
+            selectedItems.forEach(item => {
+                var itemDataString = $(item).attr("modal-config-data");
+                var itemData = JSON.parse(itemDataString);
+    
+                $.ajax({
+                    type: "POST",
+                    url: "/media/recycle/",
+                    data: {id: itemData.media_id},
+                    success: function (data) {
+                        // $('#modal_main').html(data);
+                        item.parentElement.remove();
+                    },
+                    error: function (xhr, status, error) {
+                        var errorMessage = xhr.status + " - " + xhr.responseText
+                        console.log("ERROR: " + errorMessage);
+                    }
+                });
+            });
+        }
     });
 
     $(".album-add-button").on("click", function (event) {

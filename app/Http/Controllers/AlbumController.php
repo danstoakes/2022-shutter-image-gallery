@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\View;
 
 class AlbumController extends Controller
 {
-    public function index()
+    public function index ()
     {
         $albums = Auth::user()->albums()->paginate(24);
 
@@ -65,6 +65,21 @@ class AlbumController extends Controller
         }
 
         return Redirect::route('album.show', $album)->with('success', 'Successfully added to album!');
+    }
+
+    public function destroy (Request $request)
+    {
+        $album = Album::find($request->id);
+        if ($album) 
+            $album->delete();
+
+        $albums = Auth::user()->albums()->paginate(24);
+
+        return [
+            'albums' => $albums,
+            'albumCount' => Album::all()->count(),
+            'success' => 'Successfully deleted album.'
+        ];
     }
 
     public function show ($id)
